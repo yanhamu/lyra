@@ -1,5 +1,5 @@
-﻿using Lyra.Web.Data;
-using Lyra.Web.Models;
+﻿using Lyra.DataAccess;
+using Lyra.DataAccess.Model;
 using Lyra.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Lyra.Web.Models
+namespace Lyra.DataAccess.Model
 {
     public class ApplicationUser : IdentityUser
     {

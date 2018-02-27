@@ -1,8 +1,8 @@
-﻿using Lyra.Web.Models;
+﻿using Lyra.DataAccess.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lyra.Web.Data
+namespace Lyra.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -15,5 +15,8 @@ namespace Lyra.Web.Data
         {
             base.OnModelCreating(builder);
         }
+
+        public DbSet<Realm> Realms { get; set; }
+        public DbSet<Player> Players { get; set; }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Web", "Lyra.Web\Lyra.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Services", "Lyra.Services\Lyra.Services.csproj", "{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.DataAccess", "Lyra.DataAccess\Lyra.DataAccess.csproj", "{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

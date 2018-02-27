@@ -5,16 +5,16 @@ using System.ComponentModel.DataAnnotations;
 namespace Lyra.Web.Controllers
 {
     [Authorize]
-    public class NationController : Controller
+    public class NationSetupController : Controller
     {
         [HttpGet]
-        public IActionResult Setup()
+        public IActionResult Index()
         {
             return View(new CountryViewModel());
         }
 
         [HttpPost]
-        public IActionResult Setup(CountryViewModel model)
+        public IActionResult Index(CountryViewModel model)
         {
             if (ModelState.IsValid)
             {
