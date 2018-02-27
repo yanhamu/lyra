@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Web", "Lyra.Web\Lyra.Web.csproj", "{AA960C14-2F38-46FC-9766-8BFA0AB4C704}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Services", "Lyra.Services\Lyra.Services.csproj", "{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AA960C14-2F38-46FC-9766-8BFA0AB4C704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA960C14-2F38-46FC-9766-8BFA0AB4C704}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA960C14-2F38-46FC-9766-8BFA0AB4C704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

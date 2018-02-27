@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Lyra.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Lyra.Web.Models;
+using System.Diagnostics;
 
 namespace Lyra.Web.Controllers
 {
@@ -12,6 +8,9 @@ namespace Lyra.Web.Controllers
     {
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Dashboard");
+
             return View();
         }
 
