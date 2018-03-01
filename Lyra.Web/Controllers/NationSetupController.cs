@@ -40,9 +40,10 @@ namespace Lyra.Web.Controllers
 
     public class CountryViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string CountryName { get; set; }
-        [Required]
+
+        [Required(AllowEmptyStrings = false)]
         public string PlayerName { get; set; }
     }
 }

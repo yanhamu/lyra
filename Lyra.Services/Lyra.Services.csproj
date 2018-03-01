@@ -8,4 +8,8 @@
     <PackageReference Include="MediatR" Version="4.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lyra.DataAccess\Lyra.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

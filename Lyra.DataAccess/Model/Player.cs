@@ -10,5 +10,6 @@ namespace Lyra.DataAccess.Model
         public string Name { get; set; }
         public Guid RealmId { get; set; }
         public Realm Realm { get; set; }
+        public Turns Turns { get; set; }
     }
 }
