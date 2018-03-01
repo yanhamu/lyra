@@ -7,9 +7,11 @@
 
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="StructureMap" Version="4.6.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lyra.DataAccess\Lyra.DataAccess.csproj" />
+    <ProjectReference Include="..\Lyra.Services\Lyra.Services.csproj" />
   </ItemGroup>
 
 </Project>

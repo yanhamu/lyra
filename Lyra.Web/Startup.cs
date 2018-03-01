@@ -1,5 +1,6 @@
 ﻿using Lyra.DataAccess;
 using Lyra.DataAccess.Model;
+using Lyra.Web.Extensions;
 using Lyra.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,10 @@ namespace Lyra.Web
 
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<UserIdSetterAttribute>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
