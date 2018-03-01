@@ -6,11 +6,11 @@ namespace Lyra.Services.Features.Turns
     public class TurnService
     {
         private readonly PlayerRepository playerRepository;
-        private readonly TimeProvider timeProvider;
+        private readonly ITimeProvider timeProvider;
 
         public TurnService(
             PlayerRepository playerRepository,
-            TimeProvider timeProvider)
+            ITimeProvider timeProvider)
         {
             this.playerRepository = playerRepository;
             this.timeProvider = timeProvider;
@@ -20,8 +20,7 @@ namespace Lyra.Services.Features.Turns
         {
             var player = playerRepository.Get(playerId);
 
-            var diff = timeProvider.GetNow() - player.Turns.TimeStamp;
-            var newTurns = ComputeNewTurns(diff);
+            var newTurns = ComputeNewTurns(timeProvider.GetNow(), player.Turns.TimeStamp);
             return LimitNewTurns(newTurns, player.Turns.NumberOfTurns);
         }
 
@@ -31,8 +30,9 @@ namespace Lyra.Services.Features.Turns
             return total > 240 ? 240 : total;
         }
 
-        private int ComputeNewTurns(TimeSpan diff)
+        private int ComputeNewTurns(DateTime now, DateTime lastTime)
         {
+            var diff = now - lastTime;
             var minutes = (int)diff.TotalMinutes;
             return minutes & 6;
         }
