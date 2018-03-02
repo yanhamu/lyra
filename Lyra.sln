@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Web", "Lyra.Web\Lyra.Web.csproj", "{AA960C14-2F38-46FC-9766-8BFA0AB4C704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.Web", "Lyra.Web\Lyra.Web.csproj", "{AA960C14-2F38-46FC-9766-8BFA0AB4C704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Services", "Lyra.Services\Lyra.Services.csproj", "{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.Services", "Lyra.Services\Lyra.Services.csproj", "{56EFE4FD-4CDD-4DA3-8A22-4F1B265A619A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.DataAccess", "Lyra.DataAccess\Lyra.DataAccess.csproj", "{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.DataAccess", "Lyra.DataAccess\Lyra.DataAccess.csproj", "{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Services.Tests", "Lyra.Services.Tests\Lyra.Services.Tests.csproj", "{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

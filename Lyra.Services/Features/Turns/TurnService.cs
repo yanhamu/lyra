@@ -3,7 +3,7 @@ using System;
 
 namespace Lyra.Services.Features.Turns
 {
-    public class TurnService
+    public class TurnService : ITurnService
     {
         private readonly PlayerRepository playerRepository;
         private readonly ITimeProvider timeProvider;
@@ -24,17 +24,18 @@ namespace Lyra.Services.Features.Turns
             return LimitNewTurns(newTurns, player.Turns.NumberOfTurns);
         }
 
+        public int ComputeNewTurns(DateTime now, DateTime lastTime)
+        {
+            var diff = now - lastTime;
+            var minutes = (int)diff.TotalMinutes;
+            return minutes % 6;
+        }
+
         private int LimitNewTurns(int newTurns, int numberOfTurns)
         {
             var total = numberOfTurns + newTurns;
             return total > 240 ? 240 : total;
         }
 
-        private int ComputeNewTurns(DateTime now, DateTime lastTime)
-        {
-            var diff = now - lastTime;
-            var minutes = (int)diff.TotalMinutes;
-            return minutes % 6;
-        }
     }
 }
