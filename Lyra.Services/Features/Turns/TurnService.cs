@@ -34,7 +34,7 @@ namespace Lyra.Services.Features.Turns
         {
             var diff = now - lastTime;
             var minutes = (int)diff.TotalMinutes;
-            return minutes & 6;
+            return minutes % 6;
         }
     }
 }

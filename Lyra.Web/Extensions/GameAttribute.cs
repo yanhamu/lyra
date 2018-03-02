@@ -5,11 +5,16 @@ using System;
 
 namespace Lyra.Web.Extensions
 {
-    public class GameAttribute : ActionFilterAttribute
+    public class Game : ServiceFilterAttribute
+    {
+        public Game() : base(typeof(GameFilterAttribute)) { }
+    }
+
+    public class GameFilterAttribute : ActionFilterAttribute
     {
         private readonly PlayerRepository playerRepository;
 
-        public GameAttribute(PlayerRepository playerRepository)
+        public GameFilterAttribute(PlayerRepository playerRepository)
         {
             this.playerRepository = playerRepository;
         }
