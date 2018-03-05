@@ -38,7 +38,7 @@ namespace Lyra.Web
 
             services.AddMvc(options =>
             {
-                options.Filters.Add<UserIdSetterAttribute>();
+                options.Filters.Add<GameFilterAttribute>();
             });
         }
 

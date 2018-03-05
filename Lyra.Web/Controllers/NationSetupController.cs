@@ -1,5 +1,4 @@
 ﻿using Lyra.Services.Features.RegisterCountry;
-using Lyra.Web.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +8,9 @@ using System.ComponentModel.DataAnnotations;
 namespace Lyra.Web.Controllers
 {
     [Authorize]
-    public class NationSetupController : Controller, IUserSet
+    public class NationSetupController : Controller
     {
         private readonly IMediator mediator;
-        public Guid UserId { get; set; }
 
         public NationSetupController(IMediator mediator)
         {
@@ -31,7 +29,8 @@ namespace Lyra.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                mediator.Send(new RegisterCountryCommand(model.PlayerName, model.CountryName, UserId));
+                var userId = Guid.Parse(this.HttpContext.User.Identity.Name);
+                mediator.Send(new RegisterCountryCommand(model.PlayerName, model.CountryName, userId));
                 return RedirectToAction("Index", "Dashboard");
             }
             return View(model);
