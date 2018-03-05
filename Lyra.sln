@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.Services", "Lyra.Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.DataAccess", "Lyra.DataAccess\Lyra.DataAccess.csproj", "{29D64DFF-CFD6-4D74-8AE5-1A592642AA6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Services.Tests", "Lyra.Services.Tests\Lyra.Services.Tests.csproj", "{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.Services.Tests", "Lyra.Services.Tests\Lyra.Services.Tests.csproj", "{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Web.Tests", "Lyra.Web.Tests\Lyra.Web.Tests.csproj", "{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

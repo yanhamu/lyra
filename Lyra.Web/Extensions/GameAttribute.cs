@@ -1,33 +1,37 @@
-﻿using Lyra.DataAccess.Repositories;
-using Lyra.Web.Services;
+﻿using Lyra.Web.Services;
+using Lyra.Web.Services.Flow;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Lyra.Web.Extensions
 {
-    public class Game : ServiceFilterAttribute
+    public class GameAttribute : ServiceFilterAttribute
     {
-        public Game() : base(typeof(GameFilterAttribute)) { }
+        public GameAttribute() : base(typeof(GameFilterAttribute)) { }
     }
 
     public class GameFilterAttribute : ActionFilterAttribute
     {
-        private readonly PlayerRepository repository;
         private readonly IUserIdProvider userIdProvider;
+        private readonly INextStepCommandFactory nextStepCommandFactory;
 
-        public GameFilterAttribute(PlayerRepository repository, IUserIdProvider userIdProvider)
+        public GameFilterAttribute(
+            IUserIdProvider userIdProvider,
+            INextStepCommandFactory nextStepCommandFactory)
         {
-            this.repository = repository;
             this.userIdProvider = userIdProvider;
+            this.nextStepCommandFactory = nextStepCommandFactory;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var userId = userIdProvider.Get(context.HttpContext);
-            var player = repository.GetActivePlayer(userId);
-            if (player == null)
+            var command = nextStepCommandFactory.Create(userId);
+
+            var result = command.Execute();
+            if (result != null)
             {
-                context.Result = new RedirectToActionResult("Index", "NationSetup", null);
+                context.Result = result;
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lyra.Services.Features.Turns
+namespace Lyra.Services.Common
 {
     public interface ITimeProvider
     {

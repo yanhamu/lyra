@@ -4,6 +4,11 @@ using System.Linq;
 
 namespace Lyra.DataAccess.Repositories
 {
+    public interface IPlayerRepository : IRepository<Player>
+    {
+        Player GetActivePlayer(Guid userId);
+    }
+
     public class PlayerRepository : Repository<Player>
     {
         public PlayerRepository(ApplicationDbContext context) : base(context) { }

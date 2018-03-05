@@ -1,5 +1,6 @@
 ﻿using Lyra.DataAccess.Model;
 using Lyra.DataAccess.Repositories;
+using Lyra.Services.Common;
 using System;
 
 namespace Lyra.Services.Features.Turns

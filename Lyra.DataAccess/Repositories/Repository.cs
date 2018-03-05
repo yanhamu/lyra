@@ -17,5 +17,10 @@ namespace Lyra.DataAccess.Repositories
         {
             return SourceSet.Find(ids);
         }
+
+        public int Save()
+        {
+            return context.SaveChanges();
+        }
     }
 }
