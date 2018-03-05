@@ -12,5 +12,6 @@ namespace Lyra.DataAccess.Model
         public Guid RealmId { get; set; }
         public Realm Realm { get; set; }
         public Turns Turns { get; set; }
+        public bool IsActive { get; set; }
     }
 }
