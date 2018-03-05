@@ -21,6 +21,8 @@ namespace Lyra.Web.Extensions
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
+            var userId = Guid.Parse(context.HttpContext.User.Identity.Name);
+
             var playerId = context.HttpContext.Request.Cookies["pid"];
             if (playerId == null)
             {
@@ -28,7 +30,6 @@ namespace Lyra.Web.Extensions
             }
 
             var id = Guid.Parse(playerId);
-            var userId = context.HttpContext.User.Identity.Name;
 
             var player = playerRepository.Get(id);
             if (player.UserId != userId)

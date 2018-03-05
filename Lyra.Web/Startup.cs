@@ -25,7 +25,7 @@ namespace Lyra.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(setup =>
+            services.AddIdentity<ApplicationUser, Role>(setup =>
             {
                 setup.Password.RequireUppercase = false;
                 setup.Password.RequireNonAlphanumeric = false;

@@ -5,7 +5,8 @@ namespace Lyra.DataAccess.Model
     public class Player
     {
         public int PlayerId { get; set; }
-        public string UserId { get; set; }
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
         public string Name { get; set; }
         public Guid RealmId { get; set; }

@@ -6,6 +6,5 @@ namespace Lyra.DataAccess.Model
     {
         public Guid Id { get; set; }
         public DateTime Beginning { get; set; }
-
     }
 }

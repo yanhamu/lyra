@@ -1,20 +1,9 @@
 ﻿using Lyra.DataAccess.Model;
-using System;
 
 namespace Lyra.DataAccess.Repositories
 {
-    public class RealmRepository
+    public class RealmRepository : Repository<Realm>
     {
-        private readonly ApplicationDbContext context;
-
-        public RealmRepository(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
-
-        public Realm GetRealm(Guid realmId)
-        {
-            return this.context.Realms.Find(realmId);
-        }
+        public RealmRepository(ApplicationDbContext context) : base(context) { }
     }
 }

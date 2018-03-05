@@ -1,20 +1,9 @@
 ﻿using Lyra.DataAccess.Model;
-using System;
 
 namespace Lyra.DataAccess.Repositories
 {
-    public class PlayerRepository
+    public class PlayerRepository : Repository<Player>
     {
-        private readonly ApplicationDbContext context;
-
-        public PlayerRepository(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
-
-        public Player Get(Guid playerId)
-        {
-            return context.Players.Find(playerId);
-        }
+        public PlayerRepository(ApplicationDbContext context) : base(context) { }
     }
 }
