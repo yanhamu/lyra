@@ -1,4 +1,5 @@
-﻿using Lyra.DataAccess.Repositories;
+﻿using Lyra.DataAccess.Model;
+using Lyra.DataAccess.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -12,9 +13,9 @@ namespace Lyra.Web.Extensions
 
     public class GameFilterAttribute : ActionFilterAttribute
     {
-        private readonly PlayerRepository playerRepository;
+        private readonly Repository<Player> playerRepository;
 
-        public GameFilterAttribute(PlayerRepository playerRepository)
+        public GameFilterAttribute(Repository<Player> playerRepository)
         {
             this.playerRepository = playerRepository;
         }

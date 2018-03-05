@@ -1,15 +1,16 @@
-﻿using Lyra.DataAccess.Repositories;
+﻿using Lyra.DataAccess.Model;
+using Lyra.DataAccess.Repositories;
 using System;
 
 namespace Lyra.Services.Features.Turns
 {
     public class TurnService : ITurnService
     {
-        private readonly PlayerRepository playerRepository;
+        private readonly Repository<Player> playerRepository;
         private readonly ITimeProvider timeProvider;
 
         public TurnService(
-            PlayerRepository playerRepository,
+            Repository<Player> playerRepository,
             ITimeProvider timeProvider)
         {
             this.playerRepository = playerRepository;
