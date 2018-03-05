@@ -1,7 +1,7 @@
 ﻿using Lyra.DataAccess.Repositories;
+using Lyra.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
 
 namespace Lyra.Web.Extensions
 {
@@ -13,16 +13,17 @@ namespace Lyra.Web.Extensions
     public class GameFilterAttribute : ActionFilterAttribute
     {
         private readonly PlayerRepository repository;
+        private readonly IUserIdProvider userIdProvider;
 
-        public GameFilterAttribute(PlayerRepository repository)
+        public GameFilterAttribute(PlayerRepository repository, IUserIdProvider userIdProvider)
         {
             this.repository = repository;
+            this.userIdProvider = userIdProvider;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var userId = Guid.Parse(context.HttpContext.User.Identity.Name);
-
+            var userId = userIdProvider.Get(context.HttpContext);
             var player = repository.GetActivePlayer(userId);
             if (player == null)
             {
