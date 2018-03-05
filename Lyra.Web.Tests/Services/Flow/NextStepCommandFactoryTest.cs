@@ -30,34 +30,34 @@ namespace Lyra.Web.Tests.Services.Flow
 
             var command = factory.Create(userId);
 
-            Assert.Null(command);
+            Assert.IsType<NullCommand>(command);
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void Should_Redirect_To_HallOfFame(bool isActive)
+        public void Should_Deactivate_Player_And_Redirect_To_HallOfFame(bool isActive)
         {
             realmService.IsValid(Arg.Any<Guid>()).Returns(false);
             playerRepository.GetActivePlayer(userId).Returns(new Player() { IsActive = isActive });
 
             var command = factory.Create(userId);
 
-            Assert.IsType<RealmEnded>(command);
+            Assert.IsType<DeactivatePlayerAndRedirectToHallOfFame>(command);
         }
 
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void Should_Redirect_To_Setup_New_Nation(bool isValid)
+        public void Should_Redirect_To_HallOfFame(bool isValid)
         {
             realmService.IsValid(Arg.Any<Guid>()).Returns(isValid);
             playerRepository.GetActivePlayer(userId).Returns(default(Player));
 
             var command = factory.Create(userId);
 
-            Assert.IsType<SetupNewNation>(command);
+            Assert.IsType<RedirectToHallOfFame>(command);
         }
     }
 }

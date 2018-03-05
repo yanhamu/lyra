@@ -2,11 +2,11 @@
 
 namespace Lyra.Web.Services.Flow
 {
-    public  class SetupNewNation : INextStep
+    public  class RedirectToHallOfFame : INextStep
     {
         public IActionResult Execute()
         {
-            return new RedirectToActionResult("Index", "NationSetup", null);
+            return new RedirectToActionResult("Index", "HallOfFame", null);
         }
     }
 }

@@ -28,15 +28,15 @@ namespace Lyra.Web.Services.Flow
 
             if (player == null)
             {
-                return new SetupNewNation();
+                return new RedirectToHallOfFame();
             }
 
             if (!realmService.IsValid(player.RealmId))
             {
-                return new RealmEnded(playerRepository, player);
+                return new DeactivatePlayerAndRedirectToHallOfFame(playerRepository, player, new RedirectToHallOfFame());
             }
 
-            return null;
+            return new NullCommand();
         }
     }
 }
