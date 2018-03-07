@@ -1,5 +1,6 @@
 ﻿using Lyra.DataAccess;
 using Lyra.DataAccess.Model;
+using Lyra.Web.Configuration.IoC;
 using Lyra.Web.Extensions;
 using Lyra.Web.Services;
 using Microsoft.AspNetCore.Builder;
@@ -52,7 +53,13 @@ namespace Lyra.Web
 
             container.Configure(c =>
             {
-                c.Scan(_ => _.TheCallingAssembly());
+                c.Scan(scaner =>
+                {
+                    scaner.TheCallingAssembly();
+                    scaner.WithDefaultConventions();
+                });
+
+                c.AddRegistry<ServiceRegistry>();
                 c.Populate(services);
             });
 

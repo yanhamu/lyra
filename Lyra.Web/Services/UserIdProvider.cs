@@ -8,7 +8,7 @@ namespace Lyra.Web.Services
         Guid Get(HttpContext context);
     }
 
-    public class UserIdProvider
+    public class UserIdProvider : IUserIdProvider
     {
         public Guid Get(HttpContext context)
         {
