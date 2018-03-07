@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.DataAccess", "Lyra.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.Services.Tests", "Lyra.Services.Tests\Lyra.Services.Tests.csproj", "{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyra.Web.Tests", "Lyra.Web.Tests\Lyra.Web.Tests.csproj", "{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lyra.Web.Tests", "Lyra.Web.Tests\Lyra.Web.Tests.csproj", "{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{982FE24D-F846-4257-AFC4-5436C69DB8F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D08AD0F-9EBE-4E33-9ADC-0190DD54DB39} = {982FE24D-F846-4257-AFC4-5436C69DB8F9}
+		{2CDE7CF5-A147-4E39-BFF9-41AD8DB6D1C2} = {982FE24D-F846-4257-AFC4-5436C69DB8F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8339CDB0-F248-42E4-9AAD-C9C840A5A356}

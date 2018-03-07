@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StructureMap;
+using System;
 
 namespace Lyra.Web
 {
@@ -20,7 +22,7 @@ namespace Lyra.Web
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -40,6 +42,21 @@ namespace Lyra.Web
             {
                 options.Filters.Add<GameFilterAttribute>();
             });
+
+            return ConfigurteIoC(services);
+        }
+
+        public IServiceProvider ConfigurteIoC(IServiceCollection services)
+        {
+            var container = new Container();
+
+            container.Configure(c =>
+            {
+                c.Scan(_ => _.TheCallingAssembly());
+                c.Populate(services);
+            });
+
+            return container.GetInstance<IServiceProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
