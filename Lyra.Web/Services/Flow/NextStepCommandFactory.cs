@@ -24,19 +24,25 @@ namespace Lyra.Web.Services.Flow
 
         public INextStep Create(Guid userId)
         {
-            var player = playerRepository.GetActivePlayer(userId);
+            if (ThereIsActiveRealm() == false)
+                return new RedirectToMeanWhile();
 
-            if (player == null)
-            {
-                return new RedirectToHallOfFame();
-            }
-
-            if (!realmService.IsValid(player.RealmId))
-            {
-                return new DeactivatePlayerAndRedirectToHallOfFame(playerRepository, player, new RedirectToHallOfFame());
-            }
+            if (ThereIsActivePlayer(userId) == false)
+                return new RedirectToRegisterCountry();
 
             return new NullCommand();
+        }
+
+        private bool ThereIsActivePlayer(Guid userId)
+        {
+            var activeRealm = realmService.GetActiveRealm();
+
+            return playerRepository.GetPlayerForRealm(userId, activeRealm.Id) != null;
+        }
+
+        private bool ThereIsActiveRealm()
+        {
+            return realmService.GetActiveRealm() != null;
         }
     }
 }

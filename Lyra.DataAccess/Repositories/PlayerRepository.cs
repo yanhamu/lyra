@@ -6,18 +6,18 @@ namespace Lyra.DataAccess.Repositories
 {
     public interface IPlayerRepository : IRepository<Player>
     {
-        Player GetActivePlayer(Guid userId);
+        Player GetPlayerForRealm(Guid userId, Guid id);
     }
 
     public class PlayerRepository : Repository<Player>, IPlayerRepository
     {
         public PlayerRepository(ApplicationDbContext context) : base(context) { }
 
-        public Player GetActivePlayer(Guid userId)
+        public Player GetPlayerForRealm(Guid userId, Guid realmId)
         {
-            return this.SourceSet
+            return SourceSet
                 .Where(p => p.UserId == userId)
-                .Where(p => p.IsActive)
+                .Where(p => p.RealmId == realmId)
                 .SingleOrDefault();
         }
     }

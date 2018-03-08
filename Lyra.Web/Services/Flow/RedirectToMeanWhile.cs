@@ -2,11 +2,11 @@
 
 namespace Lyra.Web.Services.Flow
 {
-    public  class RedirectToHallOfFame : INextStep
+    public class RedirectToMeanWhile : INextStep
     {
         public IActionResult Execute()
         {
-            return new RedirectToActionResult("Index", "HallOfFame", null);
+            throw new System.NotImplementedException();
         }
     }
 }

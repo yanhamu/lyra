@@ -25,39 +25,34 @@ namespace Lyra.Web.Tests.Services.Flow
         [Fact]
         public void Should_Continue()
         {
-            realmService.IsValid(Arg.Any<Guid>()).Returns(true);
-            playerRepository.GetActivePlayer(userId).Returns(new Player() { IsActive = true });
+            realmService.GetActiveRealm().Returns(new Realm());
+            playerRepository.GetPlayerForRealm(Arg.Any<Guid>(), Arg.Any<Guid>()).Returns(new Player());
 
             var command = factory.Create(userId);
 
             Assert.IsType<NullCommand>(command);
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Should_Deactivate_Player_And_Redirect_To_HallOfFame(bool isActive)
+        [Fact]
+        public void Should_Redirect_To_Meanwhile()
         {
-            realmService.IsValid(Arg.Any<Guid>()).Returns(false);
-            playerRepository.GetActivePlayer(userId).Returns(new Player() { IsActive = isActive });
+            realmService.GetActiveRealm().Returns(default(Realm));
 
             var command = factory.Create(userId);
 
-            Assert.IsType<DeactivatePlayerAndRedirectToHallOfFame>(command);
+            Assert.IsType<RedirectToMeanWhile>(command);
         }
 
-
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Should_Redirect_To_HallOfFame(bool isValid)
+        [Fact]
+        public void Should_Redirect_To_Register_Country()
         {
-            realmService.IsValid(Arg.Any<Guid>()).Returns(isValid);
-            playerRepository.GetActivePlayer(userId).Returns(default(Player));
+            var realmId = Guid.NewGuid();
+            realmService.GetActiveRealm().Returns(new Realm { Id = realmId });
+            playerRepository.GetPlayerForRealm(userId, Arg.Any<Guid>()).Returns(default(Player));
 
             var command = factory.Create(userId);
 
-            Assert.IsType<RedirectToHallOfFame>(command);
+            Assert.IsType<RedirectToRegisterCountry>(command);
         }
     }
 }

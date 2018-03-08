@@ -1,11 +1,11 @@
-﻿using Lyra.DataAccess.Repositories;
-using System;
+﻿using Lyra.DataAccess.Model;
+using Lyra.DataAccess.Repositories;
 
 namespace Lyra.Services.Common
 {
     public interface IRealmService
     {
-        bool IsValid(Guid realmId);
+        Realm GetActiveRealm();
     }
 
     public class RealmService : IRealmService
@@ -21,11 +21,10 @@ namespace Lyra.Services.Common
             this.timeProvider = timeProvider;
         }
 
-        public bool IsValid(Guid realmId)
+        public Realm GetActiveRealm()
         {
             var now = timeProvider.GetNow();
-            var realm = repository.Get(realmId);
-            return realm.Beginning < now & now <= realm.End;
+            return repository.GetActiveRealm(now);
         }
     }
 }
