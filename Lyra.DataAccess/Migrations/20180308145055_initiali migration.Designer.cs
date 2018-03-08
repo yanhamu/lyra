@@ -11,8 +11,8 @@ using System;
 namespace Lyra.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180227212611_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20180308145055_initiali migration")]
+    partial class initialimigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace Lyra.DataAccess.Migrations
 
             modelBuilder.Entity("Lyra.DataAccess.Model.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -72,9 +72,47 @@ namespace Lyra.DataAccess.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Lyra.DataAccess.Model.Player", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("PlayerId");
+
+                    b.Property<Guid>("RealmId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RealmId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("Lyra.DataAccess.Model.Realm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Beginning");
+
+                    b.Property<DateTime>("End");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Realms");
+                });
+
+            modelBuilder.Entity("Lyra.DataAccess.Model.Role", b =>
+                {
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
@@ -96,7 +134,7 @@ namespace Lyra.DataAccess.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -105,8 +143,7 @@ namespace Lyra.DataAccess.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired();
+                    b.Property<Guid>("RoleId");
 
                     b.HasKey("Id");
 
@@ -115,7 +152,7 @@ namespace Lyra.DataAccess.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -124,8 +161,7 @@ namespace Lyra.DataAccess.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
 
@@ -134,7 +170,7 @@ namespace Lyra.DataAccess.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -142,8 +178,7 @@ namespace Lyra.DataAccess.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -152,11 +187,11 @@ namespace Lyra.DataAccess.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<Guid>("UserId");
 
-                    b.Property<string>("RoleId");
+                    b.Property<Guid>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -165,9 +200,9 @@ namespace Lyra.DataAccess.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId");
+                    b.Property<Guid>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -180,15 +215,44 @@ namespace Lyra.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Lyra.DataAccess.Model.Player", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("Lyra.DataAccess.Model.Realm", "Realm")
+                        .WithMany()
+                        .HasForeignKey("RealmId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Lyra.DataAccess.Model.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.OwnsOne("Lyra.DataAccess.Model.Turns", "Turns", b1 =>
+                        {
+                            b1.Property<Guid>("PlayerId");
+
+                            b1.Property<int>("NumberOfTurns");
+
+                            b1.Property<DateTime>("TimeStamp");
+
+                            b1.ToTable("Players");
+
+                            b1.HasOne("Lyra.DataAccess.Model.Player")
+                                .WithOne("Turns")
+                                .HasForeignKey("Lyra.DataAccess.Model.Turns", "PlayerId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.HasOne("Lyra.DataAccess.Model.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("Lyra.DataAccess.Model.ApplicationUser")
                         .WithMany()
@@ -196,7 +260,7 @@ namespace Lyra.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("Lyra.DataAccess.Model.ApplicationUser")
                         .WithMany()
@@ -204,9 +268,9 @@ namespace Lyra.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("Lyra.DataAccess.Model.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -217,7 +281,7 @@ namespace Lyra.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("Lyra.DataAccess.Model.ApplicationUser")
                         .WithMany()

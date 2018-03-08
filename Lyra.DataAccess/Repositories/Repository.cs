@@ -2,7 +2,7 @@
 
 namespace Lyra.DataAccess.Repositories
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly ApplicationDbContext context;
         protected DbSet<TEntity> SourceSet { get; private set; }
@@ -13,12 +13,12 @@ namespace Lyra.DataAccess.Repositories
             this.SourceSet = context.Set<TEntity>();
         }
 
-        public TEntity Get(params object[] ids)
+        public virtual TEntity Get(params object[] ids)
         {
             return SourceSet.Find(ids);
         }
 
-        public int Save()
+        public virtual int Save()
         {
             return context.SaveChanges();
         }

@@ -41,7 +41,7 @@ namespace Lyra.Web
 
             services.AddMvc(options =>
             {
-                options.Filters.Add<GameFilterAttribute>();
+                //options.Filters.Add<GameFilterAttribute>();
             });
 
             return ConfigurteIoC(services);

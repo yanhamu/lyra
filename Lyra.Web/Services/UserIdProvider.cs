@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Lyra.DataAccess.Model;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace Lyra.Web.Services
@@ -10,9 +12,17 @@ namespace Lyra.Web.Services
 
     public class UserIdProvider : IUserIdProvider
     {
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public UserIdProvider(UserManager<ApplicationUser> userManager)
+        {
+            this.userManager = userManager;
+        }
+
         public Guid Get(HttpContext context)
         {
-            return Guid.Parse(context.User.Identity.Name);
+            var useriId = userManager.GetUserId(context.User);
+            return Guid.Parse(useriId);
         }
     }
 }

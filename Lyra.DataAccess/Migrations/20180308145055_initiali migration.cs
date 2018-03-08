@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Lyra.DataAccess.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initialimigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace Lyra.DataAccess.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
@@ -27,7 +27,7 @@ namespace Lyra.DataAccess.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -49,6 +49,19 @@ namespace Lyra.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Realms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Beginning = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Realms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -56,7 +69,7 @@ namespace Lyra.DataAccess.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<string>(nullable: false)
+                    RoleId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,7 +90,7 @@ namespace Lyra.DataAccess.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,7 +110,7 @@ namespace Lyra.DataAccess.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,8 +127,8 @@ namespace Lyra.DataAccess.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false),
+                    RoleId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,7 +151,7 @@ namespace Lyra.DataAccess.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
@@ -148,6 +161,36 @@ namespace Lyra.DataAccess.Migrations
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Players",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    PlayerId = table.Column<int>(nullable: false),
+                    RealmId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    Turns_NumberOfTurns = table.Column<int>(nullable: false),
+                    Turns_TimeStamp = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Players_Realms_RealmId",
+                        column: x => x.RealmId,
+                        principalTable: "Realms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Players_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -192,6 +235,16 @@ namespace Lyra.DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Players_RealmId",
+                table: "Players",
+                column: "RealmId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Players_UserId",
+                table: "Players",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -212,7 +265,13 @@ namespace Lyra.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Players");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Realms");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

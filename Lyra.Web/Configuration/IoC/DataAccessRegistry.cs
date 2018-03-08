@@ -1,4 +1,5 @@
-﻿using Lyra.DataAccess.Repositories;
+﻿using Lyra.DataAccess;
+using Lyra.DataAccess.Repositories;
 using StructureMap;
 
 namespace Lyra.Web.Configuration.IoC
@@ -10,8 +11,14 @@ namespace Lyra.Web.Configuration.IoC
             this.Scan(c =>
             {
                 c.AssemblyContainingType<PlayerRepository>();
+                c.AddAllTypesOf(typeof(IRepository<>));
                 c.WithDefaultConventions();
+                c.ExcludeType<ApplicationDbContext>();
             });
+
+            For<ApplicationDbContext>().Transient();
+
+
         }
     }
 }
