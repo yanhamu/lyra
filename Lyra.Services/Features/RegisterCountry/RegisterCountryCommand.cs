@@ -5,9 +5,9 @@ namespace Lyra.Services.Features.RegisterCountry
 {
     public class RegisterCountryCommand : IRequest<Guid>
     {
-        public string PlayerName { get; set; }
-        public string CountryName { get; set; }
-        public Guid UserId { get; set; }
+        public string PlayerName { get; private set; }
+        public string CountryName { get; private set; }
+        public Guid UserId { get; private set; }
 
         public RegisterCountryCommand(string playerName, string countryName, Guid userId)
         {

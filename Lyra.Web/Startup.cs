@@ -39,10 +39,10 @@ namespace Lyra.Web
 
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddMvc(options =>
-            {
-                //options.Filters.Add<GameFilterAttribute>();
-            });
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add<GameFilterAttribute>();
+            //});
 
             return ConfigurteIoC(services);
         }

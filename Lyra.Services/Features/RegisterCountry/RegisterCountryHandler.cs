@@ -7,14 +7,11 @@ namespace Lyra.Services.Features.RegisterCountry
 {
     public class RegisterCountryHandler : IRequestHandler<RegisterCountryCommand, Guid>
     {
-        public RegisterCountryHandler()
-        {
-
-        }
+        public RegisterCountryHandler() { }
 
         public Task<Guid> Handle(RegisterCountryCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();   
+            throw new NotImplementedException();
         }
     }
 }

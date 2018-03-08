@@ -1,5 +1,4 @@
-﻿using Lyra.DataAccess.Model;
-using Lyra.DataAccess.Repositories;
+﻿using Lyra.DataAccess.Repositories;
 using System;
 
 namespace Lyra.Services.Common
@@ -11,11 +10,11 @@ namespace Lyra.Services.Common
 
     public class RealmService : IRealmService
     {
-        private readonly IRepository<Realm> repository;
+        private readonly IRealmRepository repository;
         private readonly ITimeProvider timeProvider;
 
         public RealmService(
-            IRepository<Realm> repository,
+            IRealmRepository repository,
             ITimeProvider timeProvider)
         {
             this.repository = repository;

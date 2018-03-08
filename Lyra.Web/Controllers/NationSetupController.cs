@@ -1,4 +1,5 @@
-﻿using Lyra.Services.Features.RegisterCountry;
+﻿using Lyra.Services.Common;
+using Lyra.Services.Features.RegisterCountry;
 using Lyra.Web.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -12,19 +13,22 @@ namespace Lyra.Web.Controllers
     {
         private readonly IMediator mediator;
         private readonly IUserIdProvider userIdProvider;
+        private readonly IRealmService realmService;
 
-        public NationSetupController(IMediator mediator,
-            IUserIdProvider userIdProvider)
+        public NationSetupController(
+            IMediator mediator,
+            IUserIdProvider userIdProvider,
+            IRealmService realmService)
         {
             this.mediator = mediator;
             this.userIdProvider = userIdProvider;
+            this.realmService = realmService;
         }
-
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new CountryViewModel());
+            return View();
         }
 
         [HttpPost]
@@ -36,6 +40,7 @@ namespace Lyra.Web.Controllers
                 mediator.Send(new RegisterCountryCommand(model.PlayerName, model.CountryName, userId));
                 return RedirectToAction("Index", "Dashboard");
             }
+
             return View(model);
         }
     }
