@@ -9,7 +9,7 @@ namespace Lyra.DataAccess.Repositories
         Player GetActivePlayer(Guid userId);
     }
 
-    public class PlayerRepository : Repository<Player>
+    public class PlayerRepository : Repository<Player>, IPlayerRepository
     {
         public PlayerRepository(ApplicationDbContext context) : base(context) { }
 

@@ -1,18 +1,17 @@
-﻿using Lyra.Web.Services;
+﻿using Lyra.DataAccess.Repositories;
 using StructureMap;
 
 namespace Lyra.Web.Configuration.IoC
 {
-    public class ServiceRegistry : Registry
+    public class DataAccessRegistry : Registry
     {
-        public ServiceRegistry()
+        public DataAccessRegistry()
         {
             this.Scan(c =>
             {
-                c.AssemblyContainingType<IUserIdProvider>();
+                c.AssemblyContainingType<PlayerRepository>();
                 c.WithDefaultConventions();
             });
-
         }
     }
 }

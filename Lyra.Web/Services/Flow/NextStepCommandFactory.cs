@@ -9,7 +9,7 @@ namespace Lyra.Web.Services.Flow
         INextStep Create(Guid userId);
     }
 
-    public class NextStepCommandFactory
+    public class NextStepCommandFactory : INextStepCommandFactory
     {
         private readonly IRealmService realmService;
         private readonly IPlayerRepository playerRepository;

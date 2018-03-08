@@ -9,7 +9,7 @@ namespace Lyra.Services.Common
         bool IsValid(Guid realmId);
     }
 
-    public class RealmService
+    public class RealmService : IRealmService
     {
         private readonly IRepository<Realm> repository;
         private readonly ITimeProvider timeProvider;

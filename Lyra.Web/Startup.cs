@@ -34,8 +34,8 @@ namespace Lyra.Web
                 setup.Password.RequireNonAlphanumeric = false;
                 setup.Password.RequiredLength = 6;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddTransient<IEmailSender, EmailSender>();
 
@@ -59,7 +59,9 @@ namespace Lyra.Web
                     scaner.WithDefaultConventions();
                 });
 
-                c.AddRegistry<ServiceRegistry>();
+                c.AddRegistry<DataAccessRegistry>();
+                c.AddRegistry<ServicesRegistry>();
+                c.AddRegistry<WebRegistry>();
                 c.Populate(services);
             });
 
