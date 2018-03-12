@@ -6,7 +6,7 @@ namespace Lyra.DataAccess.Repositories
 {
     public interface IPlayerRepository : IRepository<Player>
     {
-        Player GetPlayerForRealm(Guid userId, Guid id);
+        Player GetPlayerForRealm(Guid userId, Guid realmId);
     }
 
     public class PlayerRepository : Repository<Player>, IPlayerRepository
